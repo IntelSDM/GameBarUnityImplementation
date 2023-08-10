@@ -69,34 +69,33 @@ namespace EftTest.Esp
                     }
                 }
 
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(1.5f);
 
             }
         }
-       
+        List<Loot> LootList = new List<Loot>();
         IEnumerator UpdateItems()
         {
             for (; ; )
             {
-                //   if (Globals.GameWorld == null)
-                //   yield return new WaitForSeconds(5f);
+                   if (Globals.GameWorld == null)
+                   yield return new WaitForSeconds(5f);
 
-                List<Loot> lootlist = new List<Loot>();
-          //      System.IO.File.WriteAllText(Globals.LootList.Count.ToString(), "");
+                LootList = new List<Loot>();
+                //      System.IO.File.WriteAllText(Globals.LootList.Count.ToString(), "");
                 foreach (Entities.EntityItem entity in Globals.LootList)
                 {
+                    if (entity.Entity == null)
+                        continue;
+                    if (entity.Entity.Item == null)
+                        continue;
                     entity.UpdateInformation();
                     if (Globals.IsScreenPointVisible(entity.W2S))
-                        lootlist.Add(entity.Loot);
+                        LootList.Add(entity.Loot);
                 }
                 if (!Globals.SocketsSetUp)
                     yield return new WaitForSeconds(5f);
-           //     rectlist.Add(new Rectangle(100, 100));
-            //    rectlist.Add(new Rectangle(200, 100));
-             //   rectlist.Add(new Rectangle(100, 300));
-              //  rectlist.Add(new Rectangle(400, 100));
-                //         Rectangle rectanglejson = new Rectangle();
-                string json = JsonConvert.SerializeObject(lootlist, Formatting.None);
+                string json = JsonConvert.SerializeObject(LootList, Formatting.None);
                 SocketServer.TCPClient.SendText(json);
                // System.IO.File.WriteAllText("networked", "");
                 yield return new WaitForEndOfFrame();
