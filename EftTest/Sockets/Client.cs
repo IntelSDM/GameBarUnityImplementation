@@ -11,7 +11,7 @@ namespace EftTest.Sockets
 {
     class Client
     {
-        private const int BufferSize = 4096;
+        private const int BufferSize = 1000000;
         public Socket Sock;
         public Client(Socket client)
         {

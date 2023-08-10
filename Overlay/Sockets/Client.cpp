@@ -5,7 +5,7 @@
 #include "LootJson.h"
 #include <locale>
 #include <codecvt>
-constexpr int BufferSize = 4096;
+constexpr int BufferSize = 1000000;
 void Client::SendText(std::string text)
 {
 	ByteArray plaintext(text.begin(), text.end());
@@ -57,7 +57,7 @@ void Client::DrawingHandler()
 				}
 			}
 
-			RectangleList.clear();
+		
 		}
 	
 	std::wstring widetext(test.begin(), test.end());

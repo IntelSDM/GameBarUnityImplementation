@@ -22,7 +22,6 @@ namespace EftTest
         public static GameWorld GameWorld;
         void Start()
         {
-            File.WriteAllText("Loaded", "loaded");
             StartCoroutine(Sockets());
          
         }

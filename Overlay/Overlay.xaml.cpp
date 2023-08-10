@@ -15,14 +15,6 @@ CanvasDrawingSession^ SwapChain;
 int WindowWidth;
 int WindowHeight;
 
-#pragma pack(push, 1)
-struct EntityItem
-{
-	float PositionX;
-	float PositionY;
-	wchar_t Name[256];
-};
-#pragma pack(pop)
 
 Overlay::Overlay()
 {

@@ -82,7 +82,7 @@ namespace EftTest.Esp
                 //   yield return new WaitForSeconds(5f);
 
                 List<Loot> lootlist = new List<Loot>();
-                System.IO.File.WriteAllText(Globals.LootList.Count.ToString(), "");
+          //      System.IO.File.WriteAllText(Globals.LootList.Count.ToString(), "");
                 foreach (Entities.EntityItem entity in Globals.LootList)
                 {
                     entity.UpdateInformation();
