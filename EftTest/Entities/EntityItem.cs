@@ -14,20 +14,21 @@ namespace EftTest.Entities
         public EntityItem(LootItem obj)
         {
             Entity = obj;
-            Name = "dsgdsg";
            
         }
         public LootItem Entity;
         public string Name;
         public Vector3 W2S;
-        public Rectangle Rectangle;
+        public Loot Loot;
         public void UpdateInformation()
         {
             if (Globals.GameWorld == null)
                 return;
-            Name = Entity.Item.Name.LocalizedShortName();
+            if (Entity == null)
+                return;
+            Name = Entity.Item.LocalizedShortName();
             W2S = Globals.WorldToScreen(Entity.transform.position);
-            Rectangle = new Rectangle(W2S.x, W2S.y);
+            Loot = new Loot(W2S.x, W2S.y,Name);
 
         }
     }

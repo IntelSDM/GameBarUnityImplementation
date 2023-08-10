@@ -30,7 +30,8 @@
 #undef Button
 #endif
 
-
+#include <iostream>
+#include <fstream>
 #include <collection.h>
 #include <ppltasks.h>
 #include <windowsx.h>

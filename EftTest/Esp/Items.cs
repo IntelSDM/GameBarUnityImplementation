@@ -14,21 +14,19 @@ using Newtonsoft.Json;
 
 namespace EftTest.Esp
 {
-    class Rectangle
+    class Loot
     {
-        public Rectangle(float x, float y)
+        public Loot(float x, float y, string name)
         {
-            Type = "Rectangle";
+            Type = "Loot";
             X = x;
             Y = y;
-            Width = 25;
-            Height = 25;
+            Name = name;
         }
         public string Type;
         public float X;
         public float Y;
-        public float Width;
-        public float Height;
+        public string Name;
 
     }
     class Items : MonoBehaviour
@@ -83,13 +81,13 @@ namespace EftTest.Esp
                 //   if (Globals.GameWorld == null)
                 //   yield return new WaitForSeconds(5f);
 
-                List<Rectangle> rectlist = new List<Rectangle>();
+                List<Loot> lootlist = new List<Loot>();
                 System.IO.File.WriteAllText(Globals.LootList.Count.ToString(), "");
                 foreach (Entities.EntityItem entity in Globals.LootList)
                 {
                     entity.UpdateInformation();
                     if (Globals.IsScreenPointVisible(entity.W2S))
-                        rectlist.Add(entity.Rectangle);
+                        lootlist.Add(entity.Loot);
                 }
                 if (!Globals.SocketsSetUp)
                     yield return new WaitForSeconds(5f);
@@ -98,7 +96,7 @@ namespace EftTest.Esp
              //   rectlist.Add(new Rectangle(100, 300));
               //  rectlist.Add(new Rectangle(400, 100));
                 //         Rectangle rectanglejson = new Rectangle();
-                string json = JsonConvert.SerializeObject(rectlist, Formatting.None);
+                string json = JsonConvert.SerializeObject(lootlist, Formatting.None);
                 SocketServer.TCPClient.SendText(json);
                // System.IO.File.WriteAllText("networked", "");
                 yield return new WaitForEndOfFrame();

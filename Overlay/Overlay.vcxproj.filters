@@ -36,6 +36,7 @@
     <ClCompile Include="Graphics\Entities\GroupBox.cpp" />
     <ClCompile Include="Sockets\Client.cpp" />
     <ClCompile Include="Sockets\Sockets.cpp" />
+    <ClCompile Include="Json\LootJson.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.xaml.h" />

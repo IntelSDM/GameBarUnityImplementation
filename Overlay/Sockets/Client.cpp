@@ -2,6 +2,9 @@
 #include "Client.h"
 #include "Graphics.h"
 #include "Drawing.h"
+#include "LootJson.h"
+#include <locale>
+#include <codecvt>
 constexpr int BufferSize = 4096;
 void Client::SendText(std::string text)
 {
@@ -27,25 +30,7 @@ void Client::MessageHandler()
 		{
 			JsonList = jsoned;
 		}
-	/*	std::string type = jsoned["Type"];
-		if (type == "Rectangle")
-		{
-			test = jsoned.dump();
-			RectangleJson rectangle(0.0f, 0.0f, 0.0f, 0.0f);
-			rectangle.FromJson(jsoned);
-			std::lock_guard<std::mutex> lock(RectangleListMutex);
-			{
-				RectangleList.push_back(rectangle);
-			}
-		}
-		*/
-		// Iterate through each JSON object in the array and convert to RectangleJson
-	/*	for (const json& js : JsonList) {
-			std::string type = js["Type"];
-			
-			std::wstring wideString(type.begin(), type.end());
-			OutputDebugString(wideString.c_str());
-		}*/
+	
 	}
 }
 void Client::DrawingHandler()
@@ -55,27 +40,20 @@ void Client::DrawingHandler()
 		{ // locked region
 			for (json jsonobject : JsonList)
 			{
-
-				
-				//OutputDebugString(L"Draw");
-				//json jsoned = json::parse(jsonobject);
 				std::string type = jsonobject["Type"];
+		
 				
-				RectangleJson rectangle(0.0f, 0.0f, 0.0f, 0.0f);
-				if (type == "Rectangle")
+				if (type == "Loot")
 				{
 					
-				
-					rectangle.FromJson(jsonobject);
-					//std::string xx = std::to_string(rectangle.Width);
-					//std::wstring wideString(xx.begin(), xx.end());
-					//OutputDebugString(wideString.c_str());
-				int x = rectangle.X;
-				int y = rectangle.Y;
-				int width = rectangle.Width;
-				int height = rectangle.Height;
-
-				SwapChain->FillRectangle(x, y, width, height, Colors::Red);
+					LootJson lootjson;
+					lootjson.FromJson(jsonobject);
+					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+					int x = lootjson.X;
+					int y = lootjson.Y;
+					std::wstring name = converter.from_bytes(lootjson.Name);
+					DrawText(x, y, name, "Verdana", 11, Colour(255, 0, 0, 255), Centre);
+				//SwapChain->FillRectangle(x, y, width, height, Colors::Red);
 				}
 			}
 
