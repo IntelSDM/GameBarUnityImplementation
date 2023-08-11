@@ -30,7 +30,7 @@ namespace EftTest.Entities
                 return;
             Name = Entity.Item.LocalizedShortName();
             W2S = Globals.WorldToScreen(Entity.transform.position);
-            Loot = new Loot(W2S.x, W2S.y,Name);
+            Loot = new Loot((float)Math.Round(W2S.x,2), (float)Math.Round(W2S.y,2),Name);
 
         }
     }
