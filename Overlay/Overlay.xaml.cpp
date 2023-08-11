@@ -37,20 +37,29 @@ void RenderingThread()
 	SwapChain = CanvasObject->SwapChain->CreateDrawingSession(Colors::Transparent);
 	CreateFont("Verdana", L"Verdana", 20, Weight::Normal);
 	CreateGUI();
+
+	int frames = 0;
+	auto starttime = std::chrono::high_resolution_clock::now();
+
 	while (true) 
 	{
 		
 		SwapChain->Clear(Colors::Transparent);
 		/* RENDER*/
+
 		TCPClient->DrawingHandler();
 
 		RenderGUI();
+		auto time = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> elapsed = time - starttime;
+		frames++;
+		int fps = frames / elapsed.count();
+		DrawText(10, 10, std::to_wstring(fps), "Verdana", 11, Colour(255, 0, 0, 255), None);
+
+
 		/*END OF RENDERING*/
 		SwapChain->Flush();
 		CanvasObject->SwapChain->Present();
-	
-
-	
 	}
 }
 

@@ -13,9 +13,8 @@ public:
 	void SendText(std::string Text);
 	std::string ReceiveText();
 
-	std::list<json> JsonList;
+	std::list<json> ItemList;
+	std::mutex ItemMutex;
 private:
 	std::string test;
-	std::mutex RectangleListMutex;
-	std::string Client::ReceiveJson();
 };

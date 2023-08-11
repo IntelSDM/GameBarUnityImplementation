@@ -26,19 +26,24 @@ void Client::MessageHandler()
 	
 
 		json jsoned = json::parse(message);
-		std::lock_guard<std::mutex> lock(RectangleListMutex);
+		
+		json first = jsoned[0];
+		if (first["Type"] == "Loot")
 		{
-			JsonList = jsoned;
+			std::lock_guard<std::mutex> lock(ItemMutex);
+			{
+				ItemList = jsoned;
+			}
 		}
-	
 	}
 }
 void Client::DrawingHandler()
 {
 	
-		std::lock_guard<std::mutex> lock(RectangleListMutex);
+		std::lock_guard<std::mutex> lock(ItemMutex);
 		{ // locked region
-			for (json jsonobject : JsonList)
+			SetDrawingSession();
+			for (json jsonobject : ItemList)
 			{
 				std::string type = jsonobject["Type"];
 		
@@ -52,47 +57,46 @@ void Client::DrawingHandler()
 					int x = lootjson.X;
 					int y = lootjson.Y;
 					std::wstring name = converter.from_bytes(lootjson.Name);
-					DrawText(x, y, name, "Verdana", 11, Colour(255, 0, 0, 255), Centre);
+					DrawTextOnSpriteBatch(x, y, name, "Verdana", 11, Colour(255, 0, 0, 255), Centre);
 				//SwapChain->FillRectangle(x, y, width, height, Colors::Red);
 				}
 			}
+			PackSpriteSession();
 
 		
 		}
 	
-	std::wstring widetext(test.begin(), test.end());
-	Platform::String^ text = ref new Platform::String(widetext.c_str());
-	SwapChain->DrawText(text, 100, 100, Colors::Red);
+	
 
 }
 std::string Client::ReceiveText()
 {
-	ByteArray	ReceivedBytes;
-	uint8_t		RecvBuffer[BufferSize];
+	ByteArray	receivedbytes;
+	uint8_t		recvbuffer[BufferSize];
 
 	while (true)
 	{
-		int32_t Received = recv(Client::Socket, (char*)RecvBuffer, BufferSize, 0);
+		int32_t Received = recv(Client::Socket, (char*)recvbuffer, BufferSize, 0);
 
 		if (Received < 0)
 			break;
 
 		for (int n = 0; n < Received; ++n)
 		{
-			ReceivedBytes.push_back(RecvBuffer[n]);
+			receivedbytes.push_back(recvbuffer[n]);
 		}
-		auto breaker = std::find(ReceivedBytes.begin(), ReceivedBytes.end(), '|');
+		auto breaker = std::find(receivedbytes.begin(), receivedbytes.end(), '|');
 
-		if (breaker != ReceivedBytes.end())
+		if (breaker != receivedbytes.end())
 		{
 			// Found the delimiter, construct the string up to the delimiter
-			std::string str(ReceivedBytes.begin(), breaker);
+			std::string str(receivedbytes.begin(), breaker);
 			return str;
 		}
 		if (Received <= BufferSize)
 			break;
-
+		
 	}
-	std::string str(ReceivedBytes.begin(), ReceivedBytes.end());
+	std::string str(receivedbytes.begin(), receivedbytes.end());
 	return str;
 }

@@ -154,6 +154,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);User32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -165,6 +166,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);User32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -177,6 +179,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);User32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -188,6 +191,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);User32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -205,6 +209,7 @@
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -219,7 +224,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>Gdi32.lib;Shell32.lib;%(AdditionalDependencies);User32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\dylan\OneDrive\Desktop\Battle_Eye_Project\ESPBar\Samples\WidgetSampleCX\glfw\include\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;C:\Users\dylan\OneDrive\Desktop\Battle_Eye_Project\ESPBar\Samples\WidgetSampleCX\glfw\include\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
