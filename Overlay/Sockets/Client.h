@@ -13,6 +13,7 @@ public:
 	void SendText(std::string Text);
 	std::string ReceiveText();
 
+	std::list<json> NewItemBuffer;
 	std::list<json> ItemList;
 	std::mutex ItemMutex;
 private:

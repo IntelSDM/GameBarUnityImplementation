@@ -17,57 +17,49 @@ void Client::MessageHandler()
 	
 	while (true)
 	{
-		std::string message = Client::ReceiveText(); // halts everything here, goes to recieve a message
+		std::string message = Client::ReceiveText();
 		if (message.size() == 0)
 			return;
-		message = message + "\n";
-		std::wstring wideString(message.begin(), message.end());
-		OutputDebugString(wideString.c_str());
-	
 
 		json jsoned = json::parse(message);
-		
-		json first = jsoned[0];
-		if (first["Type"] == "Loot")
+		if (jsoned[0]["Type"] == "Loot")
 		{
 			std::lock_guard<std::mutex> lock(ItemMutex);
-			{
-				ItemList = jsoned;
-			}
+			NewItemBuffer =jsoned;
 		}
 	}
 }
 void Client::DrawingHandler()
 {
-	
+	std::list<json> localitems;
+	{
 		std::lock_guard<std::mutex> lock(ItemMutex);
-		{ // locked region
-			SetDrawingSession();
-			for (json jsonobject : ItemList)
+		std::swap(ItemList, NewItemBuffer);
+	}
+	{
+		std::lock_guard<std::mutex> lock(ItemMutex);
+		localitems = ItemList;
+	}
+
+
+		SetDrawingSession();
+		for (json jsonobject : localitems)
+		{
+
+			if (jsonobject["Type"] == "Loot")
 			{
-				std::string type = jsonobject["Type"];
-		
-				
-				if (type == "Loot")
-				{
-					
-					LootJson lootjson;
-					lootjson.FromJson(jsonobject);
-					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-					int x = lootjson.X;
-					int y = lootjson.Y;
-					std::wstring name = converter.from_bytes(lootjson.Name);
-					DrawTextOnSpriteBatch(x, y, name, "Verdana", 11, Colour(255, 0, 0, 255), Centre);
+
+				LootJson lootjson;
+				lootjson.FromJson(jsonobject);
+				std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+				int x = lootjson.X;
+				int y = lootjson.Y;
+				std::wstring name = converter.from_bytes(lootjson.Name);
+				DrawTextOnSpriteBatch(x, y, name, "Verdana", 11, Colour(255, 0, 0, 255), Centre);
 				//SwapChain->FillRectangle(x, y, width, height, Colors::Red);
-				}
 			}
-			PackSpriteSession();
-
-		
 		}
-	
-	
-
+		PackSpriteSession();
 }
 std::string Client::ReceiveText()
 {
