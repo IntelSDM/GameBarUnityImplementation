@@ -17,7 +17,6 @@ namespace EftTest
     class Globals : MonoBehaviour
     {
         public static List<EntityItem> LootList = new List<EntityItem>();
-        public static List<EntityCorpse> CorpseList = new List<EntityCorpse>();
         public static Camera MainCamera;
         public static GameWorld GameWorld;
         void Start()
@@ -48,9 +47,9 @@ namespace EftTest
         {
             return true;
         }
-        public static bool IsScreenPointVisible(Vector3 screenPoint)
+        public static bool IsScreenPointVisible(Vector3 screenpoint)
         {
-            return screenPoint.z > 0.01f && screenPoint.x > -5f && screenPoint.y > -5f && screenPoint.x < (float)UnityEngine.Screen.width && screenPoint.y < (float)UnityEngine.Screen.height;
+            return screenpoint.z > 0.01f && screenpoint.x > -5f && screenpoint.y > -5f && screenpoint.x < (float)UnityEngine.Screen.width && screenpoint.y < (float)UnityEngine.Screen.height;
         }
 
         public static Vector3 WorldToScreen(Vector3 worldpos)

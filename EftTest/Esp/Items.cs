@@ -45,14 +45,13 @@ namespace EftTest.Esp
                
                 if (Globals.GameWorld == null)
                     yield return new WaitForSeconds(5f);
-                Globals.CorpseList.Clear();
+       
                 Globals.LootList.Clear();
             
 
 
                 if (Globals.GameWorld != null)
                 {
-          //          System.IO.File.WriteAllText(Globals.GameWorld.LootItems.Count.ToString(), "");
                     for (int i = 0; i < Globals.GameWorld.LootItems.Count; i++)
                     {
                         LootItem item = Globals.GameWorld.LootItems.GetByIndex(i);

@@ -259,7 +259,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\EntityCorpse.cs" />
     <Compile Include="Entities\EntityItem.cs" />
     <Compile Include="Esp\Caching.cs" />
     <Compile Include="Esp\Items.cs" />

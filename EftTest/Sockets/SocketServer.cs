@@ -16,22 +16,21 @@ namespace EftTest
 
         public static void CreateServer()
         {
-            // Start the server
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             Listening = socket;
 
-            IPAddress ipAddress = IPAddress.Any;
-            IPEndPoint endpoint = new IPEndPoint(ipAddress, 51000);
+            IPAddress ipaddress = IPAddress.Any;
+            IPEndPoint endpoint = new IPEndPoint(ipaddress, 51000);
 
-            Listening.Bind(endpoint); // Bind the connection rules to the listening socket
-            Listening.Listen(10);     // Keep socket open with maximum backlog of 10 connections
+            Listening.Bind(endpoint); 
+            Listening.Listen(10);
 
         }
         public static void AcceptClients()
         {
             while (true)
             {
-                Socket clientsocket = Listening.Accept(); // Accept a new client connection
+                Socket clientsocket = Listening.Accept(); 
 
 
                 TCPClient = new Sockets.Client(clientsocket);
