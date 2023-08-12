@@ -89,8 +89,10 @@ namespace EftTest.Esp
                         continue;
                     if (entity.Entity.Item == null)
                         continue;
-                    entity.UpdateInformation();
-                    if (Globals.IsScreenPointVisible(entity.W2S))
+                    if (!Globals.IsScreenPointVisible(Globals.WorldToScreen(entity.Entity.transform.position)))
+                        continue;
+                        entity.UpdateInformation();
+                  
                         LootList.Add(entity.Loot);
                 }
                 if (!Globals.SocketsSetUp)

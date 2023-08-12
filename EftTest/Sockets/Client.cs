@@ -26,24 +26,24 @@ namespace EftTest.Sockets
 
         public string ReceiveText()
         {
-            byte[] receivedBytes = new byte[BufferSize];
-            byte[] receivedData = new byte[0];
+            byte[] receivedbytes = new byte[BufferSize];
+            byte[] receiveddata = new byte[0];
 
             while (true)
             {
-                int received = Sock.Receive(receivedBytes, 0, receivedBytes.Length, SocketFlags.None);
+                int received = Sock.Receive(receivedbytes, 0, receivedbytes.Length, SocketFlags.None);
 
                 if (received <= 0)
                     break;
 
-                Array.Resize(ref receivedData, receivedData.Length + received);
-                Array.Copy(receivedBytes, 0, receivedData, receivedData.Length - received, received);
+                Array.Resize(ref receiveddata, receiveddata.Length + received);
+                Array.Copy(receivedbytes, 0, receiveddata, receiveddata.Length - received, received);
 
-                if (received < receivedBytes.Length)
+                if (received < receivedbytes.Length)
                     break;
             }
 
-            string str = Encoding.UTF8.GetString(receivedData);
+            string str = Encoding.UTF8.GetString(receiveddata);
             return str;
         }
     }
