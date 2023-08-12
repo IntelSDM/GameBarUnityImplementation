@@ -42,24 +42,23 @@ void Client::DrawingHandler()
 	}
 
 
-		SetDrawingSession();
-		for (json jsonobject : localitems)
+	SetDrawingSession();
+	for (json jsonobject : localitems)
+	{
+
+		if (jsonobject["Type"] == "Loot")
 		{
 
-			if (jsonobject["Type"] == "Loot")
-			{
-
-				LootJson lootjson;
-				lootjson.FromJson(jsonobject);
-				std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-				int x = lootjson.X;
-				int y = lootjson.Y;
-				std::wstring name = converter.from_bytes(lootjson.Name);
-				DrawTextOnSpriteBatch(x, y, name, "Verdana", 11, Colour(255, 0, 0, 255), Centre);
-				//SwapChain->FillRectangle(x, y, width, height, Colors::Red);
-			}
+			LootJson lootjson;
+			lootjson.FromJson(jsonobject);
+			std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+			int x = lootjson.X;
+			int y = lootjson.Y;
+			std::wstring name = converter.from_bytes(lootjson.Name);
+			DrawTextOnSpriteBatch(x, y, name, "Verdana", 11, Colour(255, 0, 0, 255), Centre);
 		}
-		PackSpriteSession();
+	}
+	PackSpriteSession();
 }
 std::string Client::ReceiveText()
 {
@@ -68,12 +67,12 @@ std::string Client::ReceiveText()
 
 	while (true)
 	{
-		int32_t Received = recv(Client::Socket, (char*)recvbuffer, BufferSize, 0);
+		int32_t received = recv(Client::Socket, (char*)recvbuffer, BufferSize, 0);
 
-		if (Received < 0)
+		if (received < 0)
 			break;
 
-		for (int n = 0; n < Received; ++n)
+		for (int n = 0; n < received; ++n)
 		{
 			receivedbytes.push_back(recvbuffer[n]);
 		}
@@ -81,11 +80,10 @@ std::string Client::ReceiveText()
 
 		if (breaker != receivedbytes.end())
 		{
-			// Found the delimiter, construct the string up to the delimiter
 			std::string str(receivedbytes.begin(), breaker);
 			return str;
 		}
-		if (Received <= BufferSize)
+		if (received <= BufferSize)
 			break;
 		
 	}

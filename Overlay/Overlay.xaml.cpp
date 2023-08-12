@@ -50,12 +50,7 @@ void RenderingThread()
 		TCPClient->DrawingHandler();
 
 		RenderGUI();
-		auto time = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> elapsed = time - starttime;
-		frames++;
-		int fps = frames / elapsed.count();
-		DrawText(10, 10, std::to_wstring(fps), "Verdana", 11, Colour(255, 0, 0, 255), None);
-
+	
 
 		/*END OF RENDERING*/
 		SwapChain->Flush();
