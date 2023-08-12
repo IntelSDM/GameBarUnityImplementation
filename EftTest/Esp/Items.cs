@@ -82,7 +82,6 @@ namespace EftTest.Esp
                    yield return new WaitForSeconds(5f);
 
                 LootList = new List<Loot>();
-                //      System.IO.File.WriteAllText(Globals.LootList.Count.ToString(), "");
                 foreach (Entities.EntityItem entity in Globals.LootList)
                 {
                     if (entity.Entity == null)
@@ -99,7 +98,6 @@ namespace EftTest.Esp
                     yield return new WaitForSeconds(5f);
                 string json = JsonConvert.SerializeObject(LootList, Formatting.None);
                 SocketServer.TCPClient.SendText(json);
-               // System.IO.File.WriteAllText("networked", "");
                 yield return new WaitForEndOfFrame();
 
             }

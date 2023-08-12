@@ -34,9 +34,6 @@ void CreateSockets()
             std::thread thread([&] {TCPClient->MessageHandler(); });    // create a thread for the client
             thread.detach();
             return;
-            //   closesocket(sock);
-           //    WSACleanup();
-           //    return;
         }
     }
 }
