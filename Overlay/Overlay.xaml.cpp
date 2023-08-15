@@ -51,10 +51,14 @@ void RenderingThread()
 
 		RenderGUI();
 	
-
+		auto time = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> elapsed = time - starttime;
+		frames++;
+		int fps = frames / elapsed.count();
+		DrawText(10, 10, std::to_wstring(fps), "Verdana", 11, Colour(255, 0, 0, 255), None);
 		/*END OF RENDERING*/
 		SwapChain->Flush();
-		CanvasObject->SwapChain->Present();
+		CanvasObject->SwapChain->Present(0);
 	}
 }
 
@@ -147,9 +151,10 @@ void Overlay::SwapChainPanel_Loaded(Platform::Object^ sender, Windows::UI::Xaml:
 {
 	SwapChainPanel->SwapChain = ref new CanvasSwapChain(CanvasDevice::GetSharedDevice(), (float)Window::Current->CoreWindow->Bounds.Width, 
 		(float)Window::Current->CoreWindow->Bounds.Height, 96);
-
+	
 	CanvasObject = SwapChainPanel;
 	CanvasObject->AllowFocusWhenDisabled = true;
+	
 	//lets use this it is way better for what we want
 
 	WindowWidth = Window::Current->CoreWindow->Bounds.Width;;
