@@ -1,3 +1,4 @@
+
 #pragma once
 #include "RectangleJson.h"
 using ByteArray = std::vector<uint8_t>;

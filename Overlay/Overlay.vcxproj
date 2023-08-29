@@ -151,6 +151,7 @@
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)$(ProjectName)\Sockets;$(GeneratedFilesDir)\windows;$(SolutionDir)$(ProjectName)\Windows;$(SolutionDir)$(ProjectName)\Json;$(SolutionDir)$(ProjectName)\Misc\Pch;$(SolutionDir)$(ProjectName)\Misc;$(SolutionDir)$(ProjectName)\Graphics\entities;$(SolutionDir)$(ProjectName)\Graphics\;$(SolutionDir)$(ProjectName)\Graphics\Utility;$(SolutionDir)$(ProjectName)\Graphics\Start Up;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);User32.lib</AdditionalDependencies>
@@ -163,6 +164,7 @@
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)$(ProjectName)\Sockets;$(GeneratedFilesDir)\windows;$(SolutionDir)$(ProjectName)\Windows;$(SolutionDir)$(ProjectName)\Json;$(SolutionDir)$(ProjectName)\Misc\Pch;$(SolutionDir)$(ProjectName)\Misc;$(SolutionDir)$(ProjectName)\Graphics\entities;$(SolutionDir)$(ProjectName)\Graphics\;$(SolutionDir)$(ProjectName)\Graphics\Utility;$(SolutionDir)$(ProjectName)\Graphics\Start Up;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);User32.lib</AdditionalDependencies>
@@ -176,6 +178,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)$(ProjectName)\Sockets;$(GeneratedFilesDir)\windows;$(SolutionDir)$(ProjectName)\Windows;$(SolutionDir)$(ProjectName)\Json;$(SolutionDir)$(ProjectName)\Misc\Pch;$(SolutionDir)$(ProjectName)\Misc;$(SolutionDir)$(ProjectName)\Graphics\entities;$(SolutionDir)$(ProjectName)\Graphics\;$(SolutionDir)$(ProjectName)\Graphics\Utility;$(SolutionDir)$(ProjectName)\Graphics\Start Up;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);User32.lib</AdditionalDependencies>
@@ -188,6 +191,7 @@
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)$(ProjectName)\Sockets;$(GeneratedFilesDir)\windows;$(SolutionDir)$(ProjectName)\Windows;$(SolutionDir)$(ProjectName)\Json;$(SolutionDir)$(ProjectName)\Misc\Pch;$(SolutionDir)$(ProjectName)\Misc;$(SolutionDir)$(ProjectName)\Graphics\entities;$(SolutionDir)$(ProjectName)\Graphics\;$(SolutionDir)$(ProjectName)\Graphics\Utility;$(SolutionDir)$(ProjectName)\Graphics\Start Up;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);User32.lib</AdditionalDependencies>

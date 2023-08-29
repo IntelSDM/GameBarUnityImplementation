@@ -4,8 +4,8 @@
 #include "Drawing.h"
 #include "LootJson.h"
 #include <locale>
-#include <codecvt>
-constexpr int BufferSize = 1000000;
+
+constexpr int BufferSize = 10000;
 void Client::SendText(std::string text)
 {
 	ByteArray plaintext(text.begin(), text.end());
@@ -51,10 +51,18 @@ void Client::DrawingHandler()
 
 			LootJson lootjson;
 			lootjson.FromJson(jsonobject);
-			std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 			int x = lootjson.X;
 			int y = lootjson.Y;
-			std::wstring name = converter.from_bytes(lootjson.Name);
+			int namelength = static_cast<int>(lootjson.Name.length()) + 1;
+			int wstrsize = MultiByteToWideChar(CP_UTF8, 0, lootjson.Name.c_str(), namelength, nullptr, 0);
+			if (wstrsize == 0) {
+				// Handle error
+			}
+
+			std::vector<wchar_t> wstrbuffer(wstrsize);
+			MultiByteToWideChar(CP_UTF8, 0, lootjson.Name.c_str(), namelength, wstrbuffer.data(), wstrsize);
+
+			std::wstring name(wstrbuffer.data());
 			DrawTextOnSpriteBatch(x, y, name, "Verdana", 11, Colour(255, 0, 0, 255), Centre);
 		}
 	}
